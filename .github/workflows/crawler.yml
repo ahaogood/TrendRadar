@@ -169,7 +169,7 @@ jobs:
           GITHUB_ACTIONS: true
         run: uv run python -m trendradar
 
-      - name: Send Test Email
+      - name: Send Trend Report Email
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
@@ -177,7 +177,11 @@ jobs:
           server_port: 465
           username: ${{ secrets.EMAIL_SMTP_USER }}
           password: ${{ secrets.EMAIL_SMTP_PASS }}
-          subject: "TrendRadar 测试邮件"
-          body: "你的脚本已经运行完成！这是一封测试邮件，说明配置成功了！"
+          subject: "📊 今日热点雷达报告"
+          body: |
+            你好！这是今日的热点报告，已为你整理好。
+            报告文件已作为附件发送，用浏览器打开即可查看。
           to: ${{ secrets.EMAIL_TO }}
           from: ${{ secrets.EMAIL_SMTP_USER }}
+          attachments: |
+            output/html/latest/current.html
