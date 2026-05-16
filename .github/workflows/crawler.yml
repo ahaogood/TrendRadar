@@ -179,9 +179,17 @@ jobs:
           password: ${{ secrets.EMAIL_SMTP_PASS }}
           subject: "📊 今日热点雷达报告"
           body: |
-            你好！这是今日的热点报告，已为你整理好。
-            报告文件已作为附件发送，用浏览器打开即可查看。
+            <html>
+              <body style="font-family: Arial, sans-serif; line-height: 1.6;">
+                <h2 style="color: #333;">你好！这是今日的热点报告</h2>
+                <p style="color: #666;">以下是今天为你整理的重点新闻，点击标题可查看原文：</p>
+                <hr>
+                <p>报告生成时间：${{ github.event.schedule || '手动运行' }}</p>
+                <p>报告文件已作为附件发送，也可以直接在下方查看。</p>
+              </body>
+            </html>
           to: ${{ secrets.EMAIL_TO }}
           from: ${{ secrets.EMAIL_SMTP_USER }}
           attachments: |
             output/html/latest/current.html
+          html: true
