@@ -178,18 +178,28 @@ jobs:
           username: ${{ secrets.EMAIL_SMTP_USER }}
           password: ${{ secrets.EMAIL_SMTP_PASS }}
           subject: "📊 今日热点雷达报告"
-          body: |
-            <html>
-              <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-                <h2 style="color: #333;">你好！这是今日的热点报告</h2>
-                <p style="color: #666;">以下是今天为你整理的重点新闻，点击标题可查看原文：</p>
-                <hr>
-                <p>报告生成时间：${{ github.event.schedule || '手动运行' }}</p>
-                <p>报告文件已作为附件发送，也可以直接在下方查看。</p>
-              </body>
-            </html>
           to: ${{ secrets.EMAIL_TO }}
           from: ${{ secrets.EMAIL_SMTP_USER }}
           attachments: |
             output/html/latest/current.html
-          html: true
+          html: true  # 关键！开启 HTML 解析，这样正文的标签才会生效
+          body: |
+            <html>
+              <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f9f9f9; padding: 20px;">
+                <div style="background-color: white; border-radius: 10px; padding: 30px; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                  <h2 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
+                    👋 你好！这是今日的热点报告
+                  </h2>
+                  <p style="color: #666; font-size: 16px;">
+                    以下是今天为你整理的重点新闻，<strong>点击附件里的标题可查看原文</strong>。
+                  </p>
+                  <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+                  <p style="font-size: 14px; color: #999;">
+                    📅 报告生成时间：${{ github.event.schedule || '手动运行' }}
+                  </p>
+                  <p style="font-size: 14px; color: #999;">
+                    📎 报告文件已作为附件发送，下载后用浏览器打开即可查看完整内容。
+                  </p>
+                </div>
+              </body>
+            </html>
