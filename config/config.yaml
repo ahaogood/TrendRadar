@@ -599,8 +599,4 @@ advanced:
 
 # 关键！通知渠道配置
 notifications:
-  enabled: true
-  channels:
-    - type: email
-      enabled: true
-      to: ["${EMAIL_TO}"]  # 这里用环境变量，对应你在 Secrets 里设置的邮箱
+  enabled: false
