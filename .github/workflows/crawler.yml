@@ -182,6 +182,7 @@ jobs:
           from: ${{ secrets.EMAIL_SMTP_USER }}
           attachments: |
             output/html/latest/current.html
+          # 关键！开启 HTML 解析，这样正文的标签才会生效
           html: true
           body: |
             <html>
