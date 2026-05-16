@@ -168,3 +168,16 @@ jobs:
           S3_REGION: ${{ secrets.S3_REGION }}
           GITHUB_ACTIONS: true
         run: uv run python -m trendradar
+
+      - name: Send Test Email
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.qq.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_SMTP_USER }}
+          password: ${{ secrets.EMAIL_SMTP_PASS }}
+          subject: "TrendRadar 测试邮件"
+          body: "你的脚本已经运行完成！这是一封测试邮件，说明配置成功了！"
+          to: ${{ secrets.EMAIL_TO }}
+          from: ${{ secrets.EMAIL_SMTP_USER }}
