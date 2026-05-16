@@ -597,8 +597,10 @@ advanced:
   batch_send_interval: 3              # 批次发送间隔（秒）
   feishu_message_separator: "━━━━━━━━━━━━━━━━"
 
+# 关键！通知渠道配置
 notifications:
   enabled: true
   channels:
     - type: email
       enabled: true
+      to: ["${EMAIL_TO}"]  # 这里用环境变量，对应你在 Secrets 里设置的邮箱
