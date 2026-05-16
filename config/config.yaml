@@ -335,6 +335,7 @@ notification:
       to: ""                          # 收件人邮箱，多个用逗号分隔
       smtp_server: ""                 # SMTP 服务器（可选，留空自动识别）
       smtp_port: ""                   # SMTP 端口（可选，留空自动识别）
+      enable: true
       enable_html: true
 
     ntfy:
